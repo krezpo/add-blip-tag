@@ -99,7 +99,7 @@ if __name__ == "__main__":
                 builder[state]['$tags'].append(ACTION_TAG['UserInput'])
 
         chatbot_name = str(chatbot.split("/")[-1]).replace(".json", "")
-        with open("{}{}.json2".format(config["destination_folder"], chatbot_name), "w+", encoding=ENCODING) as output:
+        with open("{}{}.json".format(config["destination_folder"], chatbot_name), "w+", encoding=ENCODING) as output:
             print("Salvando em {}{}.json".format(config["destination_folder"], chatbot_name))
             json.dump(builder, output, indent=4, ensure_ascii=False)
 
