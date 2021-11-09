@@ -1,16 +1,2 @@
-commands_url: "<url_blip_commands>"
-destination_folder: "<destination_folder>"
-source_folder: "<source_folder>"
-chatbots:
-  <chatbot_name>:
-    auth: "bot_key"
-    name: "bot_name"
-    id: "bot_id"
-  <chatbot_name_2>:
-    auth: "bot_key_2"
-    name: "bot_name_2"
-    id: "bot_id_2"
-  <chatbot_name_n>:
-    auth: "bot_key_n"
-    name: "bot_name_n"
-    id: "bot_id_n"
+destination_folder: "builder/"
+source_folder: "builder/"

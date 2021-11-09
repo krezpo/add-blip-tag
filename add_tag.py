@@ -1,8 +1,6 @@
 import glob
 import yaml
 import sys
-import requests
-import uuid
 import json
 
 ENCODING = "UTF-8"
@@ -72,15 +70,14 @@ if __name__ == "__main__":
     if config == None:
         sys.exit(-1)
 
-    chatbots = glob.glob("{}/*.json".format(config["source_folder"]))
+    chatbots = glob.glob("{}*.json".format(config["source_folder"]))
 
     for chatbot in chatbots:
-        print(chatbot)
+        print("Tagueando o {}".format(chatbot))
 
         with open(chatbot, 'r', encoding=ENCODING) as data:
             builder = json.load(data)
-
-        
+       
         for state in builder:
             add_tags = []
             builder[state]['$tags'] = []
@@ -102,7 +99,8 @@ if __name__ == "__main__":
                 builder[state]['$tags'].append(ACTION_TAG['UserInput'])
 
         chatbot_name = str(chatbot.split("/")[-1]).replace(".json", "")
-        with open("{}/{}.json".format(config["destination_folder"], chatbot_name), "w+", encoding=ENCODING) as output:
+        with open("{}{}.json2".format(config["destination_folder"], chatbot_name), "w+", encoding=ENCODING) as output:
+            print("Salvando em {}{}.json".format(config["destination_folder"], chatbot_name))
             json.dump(builder, output, indent=4, ensure_ascii=False)
-        
+
     print("Fim de execução")
