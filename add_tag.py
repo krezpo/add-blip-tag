@@ -77,26 +77,26 @@ if __name__ == "__main__":
 
         with open(chatbot, 'r', encoding=ENCODING) as data:
             builder = json.load(data)
-       
-        for state in builder:
-            add_tags = []
-            builder[state]['$tags'] = []
 
-            for action in builder[state]['$enteringCustomActions'] + builder[state]['$leavingCustomActions']:
+        for state in builder["flow"]:
+            add_tags = []
+            builder["flow"][state]['$tags'] = []
+
+            for action in builder["flow"][state]['$enteringCustomActions'] + builder["flow"][state]['$leavingCustomActions']:
                 if action['type'] not in add_tags:
                     try:
-                        builder[state]['$tags'].append(ACTION_TAG[action['type']])
+                        builder["flow"][state]['$tags'].append(ACTION_TAG[action['type']])
                         add_tags.append(action['type'])
                     except:
                         continue
 
             try:
-                builder[state]['$contentActions'][-1]['input']['bypass']
+                builder["flow"][state]['$contentActions'][-1]['input']['bypass']
             except:
                 continue
 
-            if not builder[state]['$contentActions'][-1]['input']['bypass']:
-                builder[state]['$tags'].append(ACTION_TAG['UserInput'])
+            if not builder["flow"][state]['$contentActions'][-1]['input']['bypass']:
+                builder["flow"][state]['$tags'].append(ACTION_TAG['UserInput'])
 
         chatbot_name = str(chatbot.split("/")[-1]).replace(".json", "")
         with open("{}{}.json".format(config["destination_folder"], chatbot_name), "w+", encoding=ENCODING) as output:
